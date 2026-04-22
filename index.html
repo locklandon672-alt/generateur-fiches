@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FicheIA</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:20px}
+  .container{max-width:560px;margin:0 auto}
+  .header{text-align:center;padding:30px 0 20px}
+  .header h1{color:white;font-size:30px;font-weight:800}
+  .header p{color:rgba(255,255,255,0.85);font-size:15px;margin-top:8px}
+  .card{background:white;border-radius:20px;padding:25px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+  label{display:block;font-size:12px;font-weight:700;color:#888;margin-bottom:5px;text-transform:uppercase}
+  .form-group{margin-bottom:15px}
+  input,textarea,select{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:15px;color:#333;outline:none;background:#fafafa}
+  input:focus,textarea:focus,select:focus{border-color:#667eea;background:white}
+  textarea{resize:none}
+  .btn{width:100%;padding:15px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;margin-top:5px}
+  .result-box{margin-top:20px;background:#f8f9ff;border:2px solid #e0e8ff;border-radius:16px;padding:20px;display:none}
+  .result-title{color:#667eea;font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+  .result-text{color:#333;font-size:15px;line-height:1.7;white-space:pre-wrap}
+  .copy-btn{margin-top:12px;width:100%;padding:10px;background:white;color:#667eea;border:2px solid #667eea;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}
+  .error{color:#e74c3c;font-weight:600;text-align:center;padding:15px;display:none}
+  .footer{text-align:center;color:rgba(255,255,255,0.7);font-size:13px;padding:20px 0}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🛍️ FicheIA</h1>
+    <p>Génère ta fiche produit en 5 secondes ⚡</p>
+  </div>
+  <div class="card">
+    <div class="form-group">
+      <label>Nom du produit *</label>
+      <input type="text" id="produit" placeholder="Ex: Montre LED tactile"/>
+    </div>
+    <div class="form-group">
+      <label>Prix</label>
+      <input type="text" id="prix" placeholder="Ex: 35 000 Ar"/>
+    </div>
+    <div class="form-group">
+      <label>Catégorie</label>
+      <select id="categorie">
+        <option value="mode">👗 Mode & Vêtements</option>
+        <option value="tech">📱 Tech & Gadgets</option>
+        <option value="beaute">💄 Beauté & Soin</option>
+        <option value="maison">🏠 Maison & Déco</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Détails</label>
+      <textarea id="details" rows="3" placeholder="Couleur, taille, matière..."></textarea>
+    </div>
+    <button class="btn" id="btn" onclick="generer()">✨ Générer la fiche</button>
+    <div class="error" id="error">❌ Erreur. Vérifie ta connexion et réessaie.</div>
+    <div class="result-box" id="resultBox">
+      <div class="result-title">✅ Fiche prête !</div>
+      <div class="result-text" id="result"></div>
+      <button class="copy-btn" onclick="copier()">📋 Copier</button>
+    </div>
+  </div>
+  <div class="footer">FicheIA 🇲🇬 — Pour les entrepreneurs malgaches</div>
+</div>
+<script>
+const API_KEY = "AIzaSyABxJ1GZQeY_6kF45yo1J-x96vSw-Ea8Lk";
+async function generer(){
+  const produit=document.getElementById('produit').value.trim();
+  if(!produit){alert('Entre le nom du produit !');return;}
+  const prix=document.getElementById('prix').value;
+  const cat=document.getElementById('categorie').value;
+  const details=document.getElementById('details').value;
+  const btn=document.getElementById('btn');
+  btn.innerText='⏳ Génération...';
+  btn.disabled=true;
+  document.getElementById('error').style.display='none';
+  document.getElementById('resultBox').style.display='none';
+  try{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        contents:[{parts:[{text:`Fiche produit vendeuse en français, max 80 mots. Produit: ${produit}. Prix: ${prix}. Catégorie: ${cat}. Détails: ${details}. Format: titre accrocheur, 2 avantages clés, call-to-action.`}]}],
+        generationConfig:{maxOutputTokens:200,temperature:0.7}
+      })
+    });
+    const data=await res.json();
+    if(data.candidates&&data.candidates[0]){
+      document.getElementById('result').innerText=data.candidates[0].content.parts[0].text;
+      document.getElementById('resultBox').style.display='block';
+    } else {
+      document.getElementById('error').style.display='block';
+    }
+  } catch(e){
+    document.getElementById('error').style.display='block';
+  }
+  btn.innerText='✨ Générer la fiche';
+  btn.disabled=false;
+}
+function copier(){
+  navigator.clipboard.writeText(document.getElementById('result').innerText);
+  alert('✅ Copié !');
+}
+</script>
+</body>
+</html>
