@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Guide Builder IA</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0f0f1a;color:white;padding:20px}
+  .container{max-width:600px;margin:0 auto}
+  .header{text-align:center;padding:30px 0}
+  .header h1{font-size:28px;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+  .header p{color:#aaa;margin-top:8px;font-size:15px}
+  .card{background:#1a1a2e;border:1px solid #333;border-radius:16px;padding:20px;margin-bottom:15px}
+  .card h2{font-size:16px;color:#667eea;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .step{background:#0f0f1a;border-radius:10px;padding:12px;margin-bottom:8px;font-size:14px;color:#ddd;line-height:1.6}
+  .step span{color:#764ba2;font-weight:700}
+  code{background:#2a2a3e;padding:3px 8px;border-radius:5px;font-size:13px;color:#a78bfa;font-family:monospace}
+  .tag{display:inline-block;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:3px 10px;border-radius:20px;font-size:12px;margin:3px}
+  .link{color:#667eea;text-decoration:none;font-weight:600}
+  .warning{background:#2a1a0f;border:1px solid #764ba2;border-radius:10px;padding:12px;font-size:14px;color:#ffa07a;margin-top:8px}
+  .footer{text-align:center;color:#555;font-size:13px;padding:20px 0}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🚀 Mon Guide Builder IA</h1>
+    <p>Tout ce qu'il faut pour créer des apps IA gratuitement 🇲🇬</p>
+  </div>
+
+  <div class="card">
+    <h2>🛠️ Les outils gratuits essentiels</h2>
+    <div class="step"><span>GitHub</span> → <a class="link" href="https://github.com">github.com</a><br>Stocke ton code gratuitement</div>
+    <div class="step"><span>Vercel</span> → <a class="link" href="https://vercel.com">vercel.com</a><br>Met ton app en ligne gratuitement</div>
+    <div class="step"><span>Google AI Studio</span> → <a class="link" href="https://aistudio.google.com">aistudio.google.com</a><br>Clé API Gemini gratuite</div>
+    <div class="step"><span>Claude</span> → <a class="link" href="https://claude.ai">claude.ai</a><br>Génère tout ton code gratuitement</div>
+    <div class="step"><span>FedaPay</span> → <a class="link" href="https://fedapay.com">fedapay.com</a><br>Paiement MVola pour monétiser</div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ La formule magique pour créer une app</h2>
+    <div class="step">1️⃣ <span>Demande le code à Claude</span><br>Décris ton app en français, Claude génère tout</div>
+    <div class="step">2️⃣ <span>Crée un repository GitHub</span><br>Nouveau repo → Crée index.html → Colle le code</div>
+    <div class="step">3️⃣ <span>Remplace la clé API</span><br>Trouve <code>COLLE_TA_CLÉ_ICI</code> → colle ta clé Gemini</div>
+    <div class="step">4️⃣ <span>Déploie sur Vercel</span><br>Import GitHub repo → Deploy → App en ligne !</div>
+  </div>
+
+  <div class="card">
+    <h2>🔑 Le code de base pour toute app IA</h2>
+    <div class="step">
+      <code>const API_KEY = "Ta clé Gemini";</code><br><br>
+      <code>const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`, {</code><br>
+      <code>  method: 'POST',</code><br>
+      <code>  headers: {'Content-Type': 'application/json'},</code><br>
+      <code>  body: JSON.stringify({</code><br>
+      <code>    contents: [{parts: [{text: TON_PROMPT}]}],</code><br>
+      <code>    generationConfig: {maxOutputTokens: 300}</code><br>
+      <code>  })</code><br>
+      <code>});</code>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💡 Les idées d'apps à créer</h2>
+    <div class="step">
+      <span class="tag">✅ Fait</span> Générateur de fiches produits<br><br>
+      <span class="tag">🔜 Suivant</span> Générateur d'exposés<br>
+      <span class="tag">💰</span> Chatbot service client<br>
+      <span class="tag">💰</span> Générateur de posts réseaux sociaux<br>
+      <span class="tag">💰</span> Calculateur prix dropshipping
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Comment monétiser</h2>
+    <div class="step"><span>Prix conseillé</span> → 5 000 Ar/mois par utilisateur</div>
+    <div class="step"><span>Paiement</span> → FedaPay (MVola + Orange Money)</div>
+    <div class="step"><span>Marketing</span> → TikTok + groupes Facebook malgaches</div>
+    <div class="step"><span>Objectif</span> → 50 abonnés = 250 000 Ar/mois</div>
+  </div>
+
+  <div class="warning">
+    🔐 <strong>Ne jamais partager ta clé API !</strong><br>
+    C'est comme un mot de passe. Ne la montre à personne et ne la colle jamais dans un chat.
+  </div>
+
+  <div class="footer">Créé avec Claude IA 🤖 — Builder malgache 🇲🇬</div>
+</div>
+</body>
+</html>
